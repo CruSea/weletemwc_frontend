@@ -1,0 +1,22 @@
+<form>
+  <div class="modal-body">
+    <h5 class="text-center">Detail</h5>
+    <div class="form-label-group">
+      <mat-form-field class="example-full-width">
+        <input  matInput [readonly]="!editable" placeholder="Full Name" [(ngModel)]="selected_user_data.full_name" name="full_name">
+      </mat-form-field>
+    </div>
+    <div class="form-label-group">
+      <mat-form-field class="example-full-width">
+        <input matInput [readonly]="!editable" placeholder="Email" [(ngModel)]="selected_user_data.email" name="email" >
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput [readonly]="!editable" placeholder="Phone" [(ngModel)]="selected_user_data.phone" name="phone">
+      </mat-form-field>
+    </div>
+
+    <div class="form-label-group">
+      <button mat-raised-button type="button" (click)="cancel()" class="btn btn-danger pull-right">Cancel</button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,37 @@
+<form>
+  <div class="modal-body">
+    <div class="form-label-group">
+      <mat-form-field class="example-full-width">
+        <input *ngIf="selected_partner_data.user_id" matInput placeholder="Full Name" [(ngModel)]="selected_partner_data.user.full_name" name="full_name">
+        <input *ngIf="!selected_partner_data.user_id"matInput placeholder="Full Name" [(ngModel)]="selected_partner_data.full_name" name="full_name">
+      </mat-form-field>
+    </div>
+    <div class="form-label-group">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Email" [(ngModel)]="selected_partner_data.email" name="email">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Phone" [(ngModel)]="selected_partner_data.phone" name="phone">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Country" [(ngModel)]="selected_partner_data.country" name="country">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="City" [(ngModel)]="selected_partner_data.city" name="city">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Adress" [(ngModel)]="selected_partner_data.address" name="addres">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="pledge_amount" [(ngModel)]="selected_partner_data.pledge_amount" name="pledge_amount">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="pledge_frequency" [(ngModel)]="selected_partner_data.pledge_frequency" name="pledge_frequency">
+      </mat-form-field>
+    </div>
+
+    <div class="form-label-group">
+      <button mat-raised-button type="button" (click)="updatePartner(selected_partner_data)" class="btn btn-danger pull-right">Update Partner</button>
+    </div>
+  </div>
+</form>

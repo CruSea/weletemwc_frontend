@@ -1,0 +1,28 @@
+<div>
+  <form (submit)="updateTeam()">
+    <div class="form-label-group">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="ስም" [(ngModel)]="selected_team.name" name="name">
+      </mat-form-field>
+    </div>
+    <div class="form-label-group">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="መግለጫ" [(ngModel)]="selected_team.description" name="description">
+      </mat-form-field>
+    </div>
+
+    <div class="form-label-group">
+
+      <mat-form-field>
+        <mat-select placeholder="ምድብ"  name="category" [(ngModel)]="selected_team.category_id">
+          <mat-option *ngFor="let category of team_categories" value="{{category.id}}">{{category.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+
+    <div class="form-label-group">
+      <button class="btn btn-fill btn-info pull-right" type="submit">ህብረት አዘምን</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,35 @@
+
+<div>
+  <form (submit)="addChild()">
+    <div class="form-label-group">
+      <mat-form-field>
+        <input matInput placeholder="ሙሉ ስም" name="new_child_full_name"
+               [(ngModel)]="new_member_child_info.full_name" required>
+      </mat-form-field>
+    </div>
+
+    <div class="form-label-group">
+      <mat-form-field>
+        <input matInput [readonly]="!editable" [matDatepicker]="pickerchild_new_child" placeholder="የትውልድ ዘመን"
+               name="new_child_birthday" [(ngModel)]="new_member_child_info.birthday">
+        <mat-datepicker-toggle matSuffix [for]="pickerchild_new_child"></mat-datepicker-toggle>
+        <mat-datepicker #pickerchild_new_child></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="form-label-group">
+
+      <mat-form-field>
+        <mat-select placeholder="ፆታ" name="new_child_gender" [(ngModel)]="new_member_child_info.gender" required>
+          <mat-option value="ወንድ">ወንድ</mat-option>
+          <mat-option value="ሴት">ሴት</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+
+    <div class="form-label-group">
+      <button class="btn btn-fill btn-info pull-right" type="submit">ልጅ ጨምር</button>
+    </div>
+  </form>
+</div>

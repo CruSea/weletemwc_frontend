@@ -1,0 +1,107 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="card">
+          <div class="card-header card-header-tabs card-header-warning">
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+                <span class="nav-tabs-title">Filters:</span>
+              </div>
+            </div>
+
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+                <ul class="nav nav-tabs pull-right" data-tabs="tabs">
+                  <li class="nav-item pull-right">
+                    <a mat-button class="nav-link" (click)="showCategories()">
+                      <i class="material-icons">assignment</i>የቡድን እይነቶች
+                    </a>
+                  </li>
+
+                  <li class="nav-item pull-right">
+                    <a mat-button class="nav-link active" (click)="addNewTeam()">
+                      <i class="material-icons">add</i>ቡድን ፍጠር
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="row">
+                <mat-card *ngFor="let team of paginated_teams_data.data" class="example-card col-sm-11 col-lg-3 col-md-5" style="margin: 10px; left: 30px;">
+                    <button mat-icon-button [matMenuTriggerFor]="menu"  fxLayout="row" fxLayoutAlign="end" class="pull-right">
+                      <mat-icon align="end">menu</mat-icon>
+                    </button>
+
+                    <mat-menu #menu="matMenu" class="pull-right">
+                      <button mat-menu-item (click)="editTeam(team)">አስተካክል</button>
+                      <button mat-menu-item (click)="removeTeam(team)">ሰርዝ</button>
+                    </mat-menu>
+
+                  <mat-card-header>
+                    </mat-card-header>
+
+                    <mat-card-content>
+                      <div class="col-10">
+
+                        <div class="row">
+
+                          <a (click)="openTeamDetail(team);" [routerLink]="['/admin/team/members']" class="col-12">
+
+                            <ngx-avatar name="{{team.name}}"></ngx-avatar>
+                            <h4 class="title">{{(team.name.length > 30)?(team.name | slice:0:20)+ '..':(team.name)}}</h4>
+                          </a>
+                        </div>
+
+
+                      </div>
+                      <br>
+                      <div class="col-lg-12 col-md-12 col-sm-12 justify-content-center">
+                        <p  mat-card-image class="img-article" alt="" > {{team.description}} </p>
+                      </div>
+
+                      <div>
+
+                        <table mat-table [dataSource]="team.team_member" class="mat-elevation-z1 col-12" *ngIf="team.team_member.length > 0">
+
+                          <!-- Name Column -->
+                          <ng-container matColumnDef="full_name">
+                            <th mat-header-cell *matHeaderCellDef>Name</th>
+                            <td mat-cell *matCellDef="let row">{{row.members.full_name}}</td>
+                          </ng-container>
+
+                          <!-- Phone Column -->
+                          <ng-container matColumnDef="phone_cell">
+                            <th mat-header-cell *matHeaderCellDef>Phone</th>
+                            <td mat-cell *matCellDef="let row">{{row.members.phone_cell}}</td>
+                          </ng-container>
+
+
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+
+                      </div>
+
+                    </mat-card-content>
+                    <mat-card-actions class="action-buttons">
+                      <!--<button  mat-button color="success" class="pull-right"><div class="card-icon"><i class="fa fa-share"></i></div>Un Publish</button>-->
+                    </mat-card-actions>
+
+                </mat-card>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '5px' }"></ngx-loading>

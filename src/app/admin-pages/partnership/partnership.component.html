@@ -1,0 +1,145 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-warning card-header-icon">
+            <div class="card-icon">
+              <i class="fa fa-newspaper-o"></i>
+            </div>
+            <p class="card-category">Partners</p>
+            <h3 class="card-title">{{partners_dashboard_data.all_partners}}
+              <small></small>
+            </h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">assignment</i>
+              <a>Total Number Of Partners</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-success card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">assignment</i>
+            </div>
+            <p class="card-category">Approved</p>
+            <h3 class="card-title">{{partners_dashboard_data.partner_requests_approved}}</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">assignment</i>Total Number Of approved Request
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-danger card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">thumb_up</i>
+            </div>
+            <p class="card-category">Not Approved</p>
+            <h3 class="card-title">{{partners_dashboard_data.partner_requests_not_approved}}</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">thumb_up</i>Total Number Of Not Approved Requests
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="card">
+          <div class="card-header card-header-tabs card-header-warning">
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+                <span class="nav-tabs-title">PartnerShip Filters:</span>
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                  <li class="nav-item">
+                    <a mat-button class="nav-link" (click)="getPartners()" data-toggle="tab">
+                      <i class="material-icons">assignment</i> Partners
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a mat-button class="nav-link" (click)="getPartnershipRequests()" data-toggle="tab">
+                      <i class="material-icons">assignment</i> Partnership Requests
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+                <ul class="nav nav-tabs pull-right" data-tabs="tabs">
+                  <li class="nav-item pull-right">
+                    <a mat-button class="nav-link active" (click)="adddPartnerDialog()" *ngIf="filter_activate">
+                      <button mat-raised-button >Add Partner</button>
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <h5 *ngIf="filter_activate">All Partners</h5>
+            <h5 *ngIf="!filter_activate">Partnership Requests</h5>
+            <div class="table-responsive">
+              <table class="table table-hover table-striped table-condensed">
+                <thead class=" text-primary">
+                <th> ID </th>
+                <th> Full Name </th>
+                <th> Pledge </th>
+                <th> Pledge Frequency </th>
+                <th> Created At </th>
+                <th> Action </th>
+                <th> </th>
+                </thead>
+                <tbody>
+                <tr *ngFor="let partnership of paginated_partnership_data.data; let i = index"  style="cursor: pointer;">
+                  <td> {{paginated_partnership_data.from + i}} </td>
+                  <td class="zoom" (click)="viewPartnerInfoDialog(partnership)" *ngIf="partnership.user_id"> <strong>{{partnership.user.full_name}}</strong> </td>
+                  <td class="zoom" (click)="viewPartnerInfoDialog(partnership)" *ngIf="!partnership.user_id"> <strong>{{partnership.full_name}}</strong> </td>
+                  <td  class="zoom" (click)="viewPartnerInfoDialog(partnership)">  {{partnership.pledge_amount}} </td>
+                  <td class="zoom" (click)="viewPartnerInfoDialog(partnership)">  {{partnership.pledge_frequency}} </td>
+                  <td> {{partnership.created_at}} </td>
+                  <td class="td-actions">
+                    <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="material-icons">edit</i>  Edit
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <!--<a class="dropdown-item" (click)="updatePartnerDialog(partnership)">View Partner Information</a>-->
+                        <a class="dropdown-item" (click)="approvePartnerShip(partnership)" *ngIf="!filter_activate">Approve PartnerShip Request</a>
+                        <a class="dropdown-item" (click)="updatePartnerDialog(partnership)" *ngIf="filter_activate && !partnership.user_id">Update Partner Info</a>
+                        <a class="dropdown-item" (click)="removePartner(partnership)">Remove Partner</a>
+
+                      </div>
+                    </div>
+
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <mat-paginator [length]="paginated_partnership_data.total"
+                           [pageSize]="paginated_partnership_data.per_page"
+                           [pageSizeOptions]="pageSizeOptions"
+                           (page)="updatePartnerDataList($event)">
+            </mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '5px' }"></ngx-loading>

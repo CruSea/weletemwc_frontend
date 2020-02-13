@@ -1,0 +1,248 @@
+<h4>የአባላት መረጃ </h4>
+<mat-dialog-content>
+   <form action=""  style="margin: 10px;">
+       <br>
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-3">
+                <mat-card>
+                  <!--<mat-card-title>-->
+                  <img  mat-card-image  class="img-article" height="180" width="250" [src] ="selected_member_data.photo_url" alt="Image_prayer">
+                  <!--</mat-card-title>-->
+                </mat-card>
+                <br>
+              </div>
+              <div class="col-sm-2">
+                        <mat-form-field>
+                          <input matInput [readonly]="!editable" placeholder="ሙሉ ስም" name="full_name"  [(ngModel)]="selected_member_data.full_name" >
+                        </mat-form-field>
+                        <mat-form-field>
+                          <input matInput [readonly]="!editable"  placeholder="የልደት ቦታ"
+                                 name="birth_day" [(ngModel)]="selected_member_data.birth_day">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput [readonly]="!editable"  placeholder="ፆታ" name="gender" [(ngModel)]="selected_member_data.gender" >
+                        </mat-form-field>
+
+              </div>
+              <div class="col-sm-2">
+                        <mat-form-field>
+                          <input matInput [readonly]="!editable"  placeholder="ኢሜይል" name="email" [(ngModel)]="selected_member_data.email" >
+                        </mat-form-field>
+                        <mat-form-field>
+                          <input matInput [readonly]="!editable" placeholder="ስልክ ቁጥር" name="phone_cell" [(ngModel)]="selected_member_data.phone_cell">
+                        </mat-form-field>
+
+              </div>
+
+               <div class="col-sm-2">
+                        <mat-form-field>
+                          <input matInput [readonly]="!editable" placeholder="ዜግነት"  name="nationality" [(ngModel)]="selected_member_data.nationality" >
+                        </mat-form-field>
+                        <mat-form-field>
+                          <input matInput [readonly]="!editable" placeholder="ከተማ" name="city" [(ngModel)]="selected_member_data.city" >
+                        </mat-form-field>
+                       <mat-form-field>
+                           <input matInput [readonly]="!editable" placeholder="የጋብቻ ሁኔታ" name="marital_status" [(ngModel)]="selected_member_data.marital_status" >
+                       </mat-form-field>
+
+               </div>
+              <div class="col-sm-3">
+                        <mat-form-field>
+                          <input matInput [readonly]="!editable" placeholder="ስራ" name="occupation" [(ngModel)]="selected_member_data.occupation" >
+                        </mat-form-field>
+              </div>
+                <div class="col-sm-3">
+                    <mat-form-field>
+                        <input matInput [readonly]="!editable" placeholder="አድራሻ" name="address" [(ngModel)]="selected_member_data.address">
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-3">
+                    <mat-form-field>
+                        <mat-select placeholder="የመኖሪያ ሁኔታ"  name="living_status" [(ngModel)]="selected_member_data.living_status">
+                            <mat-option value="የግል">የግል መኖሪያ</mat-option>
+                            <mat-option value="ተከራይ">ተከራይ</mat-option>
+                            <mat-option value="ሌላ"> ሌላ</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                </div>
+
+                <div class="col-sm-3" *ngIf="selected_member_data.living_status == 'ሌላ' ">
+                    <mat-form-field >
+                        <input matInput placeholder="የመኖሪያ ሁኔታ ሌላ" name="living_status_other" [(ngModel)]="selected_member_data.living_status_other">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-sm-3">
+                    <mat-form-field>
+                        <input matInput [readonly]="!editable"  placeholder="የመዳን ቀን"
+                               name="salvation_date" [(ngModel)]="selected_member_data.salvation_date">
+                    </mat-form-field>
+
+                </div>
+                <div class="col-sm-3">
+                    <mat-form-field>
+                        <input matInput [readonly]="!editable"  placeholder="በውሃ ጥምቀት ተጠምቀዋል?"
+                               name="is_baptized" [(ngModel)]="selected_member_data.is_baptized">
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-3">
+                    <mat-form-field>
+                        <input matInput [readonly]="!editable" placeholder="የጥምቀት ቀን" name="baptized_date"
+                               [(ngModel)]="selected_member_data.baptized_date">
+                    </mat-form-field>
+                </div>
+            </div>
+          </div>
+
+          <div class="col-sm-12" *ngIf="has_spouse">
+       <div class="row">
+         <div class="col-sm-12" >
+         <p><small>የትዳር ጓደኛ መረጃ ዝርዝር</small></p>
+         </div>
+         <div class="col-sm-3">
+                   <mat-form-field >
+                     <input matInput [readonly]="!editable" placeholder="ሙሉ ስም" name="spouse_full_name"  [(ngModel)]="selected_member_data.spouse.full_name" >
+                   </mat-form-field>
+                   <mat-form-field>
+                     <input matInput  [readonly]="!editable" placeholder="የትዳር ጓደኛ የትውልድ ዘመን "  name="spouse_birth_day" [(ngModel)]="selected_member_data.spouse.birth_day">
+                   </mat-form-field>
+
+                   <mat-form-field>
+                       <input matInput [readonly]="!editable" placeholder="ፆታ" name="spouse_gender"  [(ngModel)]="selected_member_data.spouse.gender" >
+                   </mat-form-field>
+
+         </div>
+         <div class="col-sm-3">
+                 <mat-form-field>
+                   <input matInput [readonly]="!editable"  placeholder="ኢሜይል" name="spouse_email" [(ngModel)]="selected_member_data.spouse.email" >
+                 </mat-form-field>
+                 <mat-form-field>
+                   <input matInput [readonly]="!editable"  placeholder="ስልክ" name="spouse_phone_cell" [(ngModel)]="selected_member_data.spouse.phone_cell">
+                 </mat-form-field>
+         </div>
+           <div class="col-sm-3">
+                 <mat-form-field>
+                   <input matInput  [readonly]="!editable" placeholder="ዜግነት"  name="spouse_nationality" [(ngModel)]="selected_member_data.spouse.nationality" >
+                 </mat-form-field>
+                 <mat-form-field>
+                   <input matInput [readonly]="!editable"  placeholder="ከተማ" name="spouse_city" [(ngModel)]="selected_member_data.spouse.city" >
+                 </mat-form-field>
+               <mat-form-field>
+                   <input matInput [readonly]="!editable" placeholder="አድራሻ" name="spouse_address" [(ngModel)]="selected_member_data.spouse.address">
+               </mat-form-field>
+
+           </div>
+             <div class="col-sm-3">
+                 <mat-form-field>
+                     <input matInput  [readonly]="!editable" placeholder="ስራ" name="spouse_occupation" [(ngModel)]="selected_member_data.spouse.occupation" >
+                 </mat-form-field>
+                 <mat-form-field>
+                   <input matInput [readonly]="!editable" placeholder="የስራ ሃላፊነት"  name="spouse_employment_position" [(ngModel)]="selected_member_data.spouse.employment_position" >
+                 </mat-form-field>
+                 <mat-form-field>
+                   <input matInput [readonly]="!editable" placeholder="የስራ ቦታ"  name="spouse_employment_place" [(ngModel)]="selected_member_data.spouse.employment_place">
+                 </mat-form-field>
+         </div>
+
+           <div class="col-sm-3">
+               <mat-form-field>
+                   <input matInput [readonly]="!editable"  placeholder="የመዳን ቀን"
+                          name="spouse_salvation_date" [(ngModel)]="selected_member_data.spouse.salvation_date">
+               </mat-form-field>
+
+           </div>
+           <div class="col-sm-6">
+               <mat-form-field>
+                   <input matInput [readonly]="!editable"  placeholder="በውሃ ጥምቀት ተጠምቀዋል?"
+                          name="spouse_is_baptized" [(ngModel)]="selected_member_data.spouse.is_baptized">
+               </mat-form-field>
+
+           </div>
+           <div class="col-sm-3">
+               <mat-form-field>
+                   <input matInput [readonly]="!editable" placeholder="የጥምቀት ቀን" name="baptized_date"
+                          [(ngModel)]="selected_member_data.spouse.baptized_date">
+               </mat-form-field>
+           </div>
+
+       </div>
+     </div>
+     <div class="col-sm-12" *ngIf="has_child">
+       <div class="row">
+         <div class="col-sm-12" >
+           <p><small>የልጆች መረጃ ዝርዝር</small></p>
+         </div>
+
+         <div class="col-sm-12">
+             <div class="card-body">
+                 <div class="table-responsive">
+                     <table class="table table-hover table-striped table-condensed">
+                         <thead class=" text-primary">
+                         <th> ቁጥር </th>
+                         <th> ሙሉ ስም </th>
+                         <th> የትውልድ ዘመን </th>
+                         <th> ፆታ </th>
+                         <!--<th> Action </th>-->
+                         </thead>
+                         <tbody>
+                         <tr *ngFor="let childrens of selected_member_data.children; let i = index" class="zoom" style="cursor: pointer;">
+                             <td> {{ i + 1}} </td>
+                             <td> <strong>{{childrens.full_name}}</strong></td>
+                             <td> {{childrens.birthday}} </td>
+                             <td> {{childrens.gender}} </td>
+                             <!--<td class="td-actions">-->
+                                 <!--<button mat-raised-button type="button" matTooltip="Remove Public User"-->
+                                         <!--[matTooltipPosition]="'above'" (click)="removeUser(user)"-->
+                                         <!--class="btn btn-danger btn-link btn-sm btn-just-icon">-->
+                                     <!--<i class="material-icons">close</i>-->
+                                 <!--</button>-->
+                             <!--</td>-->
+                         </tr>
+                         </tbody>
+                     </table>
+                 </div>
+             </div>
+         </div>
+
+       </div>
+     </div>
+       <div class="col-sm-12" *ngIf="had_church">
+                   <div class="row">
+                       <div class="col-sm-12">
+                           <p><small>የቀደመችው የቤተ ክርስቲያን መረጃ ዝርዝር</small></p>
+                       </div>
+                       <div class="col-sm-3">
+                           <mat-card >
+                               <!--<mat-card-title>-->
+                               <img  mat-card-image  class="img-article" height="250" width="250" [src] ="selected_member_data.member_previous_church.image_url" alt="Image_previous church">
+                               <!--</mat-card-title>-->
+                           </mat-card>
+                           <br>
+                       </div>
+                       <div class="col-sm-9">
+                           <mat-form-field>
+                               <input matInput [readonly]="!editable" placeholder="የቤተክርስቲያን ስም" name="church_name"  [(ngModel)]="selected_member_data.member_previous_church.church_name" >
+                           </mat-form-field>
+                           <mat-form-field>
+                               <input matInput  [readonly]="!editable" placeholder="የለቀቁበት ምክንያት" name="leaving_reason"  [(ngModel)]="selected_member_data.member_previous_church.leaving_reason" >
+                           </mat-form-field>
+                           <mat-form-field>
+                               <input matInput  [readonly]="!editable" placeholder="አባል ነበሩ?" name="was_member"  [(ngModel)]="selected_member_data.member_previous_church.was_member" >
+                           </mat-form-field>
+
+                           <mat-form-field>
+                               <input matInput  [readonly]="!editable" placeholder="የቆይታ ጊዜ" name="duration"  [(ngModel)]="selected_member_data.member_previous_church.duration" >
+                           </mat-form-field>
+
+                       </div>
+                   </div>
+
+       </div>
+   </form>
+</mat-dialog-content>
+<div class="form-label-group">
+    <br>
+    <button mat-raised-button type="button" (click)="cancel();" class="btn btn-default pull-right">ዝጋ</button>
+</div>

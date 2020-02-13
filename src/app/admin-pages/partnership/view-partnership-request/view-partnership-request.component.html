@@ -1,0 +1,39 @@
+<form>
+  <div class="modal-body">
+    <h5 class="text-center">Detail</h5>
+    <div class="form-label-group">
+      <mat-form-field class="example-full-width">
+        <input *ngIf="selected_partner_data.user_id" matInput [readonly]="!editable" placeholder="Full Name" [(ngModel)]="selected_partner_data.user.full_name" name="full_name">
+        <input *ngIf="!selected_partner_data.user_id"matInput [readonly]="!editable" placeholder="Full Name" [(ngModel)]="selected_partner_data.full_name" name="full_name">
+      </mat-form-field>
+    </div>
+    <div class="form-label-group">
+      <mat-form-field class="example-full-width">
+        <input matInput [readonly]="!editable" placeholder="Email" [(ngModel)]="selected_partner_data.email" name="email" >
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput [readonly]="!editable" placeholder="Phone" [(ngModel)]="selected_partner_data.phone" name="phone">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput [readonly]="!editable" placeholder="Country" [(ngModel)]="selected_partner_data.country" name="country">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput [readonly]="!editable" placeholder="City" [(ngModel)]="selected_partner_data.city" name="city">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput [readonly]="!editable" placeholder="Adress" [(ngModel)]="selected_partner_data.address" name="addres">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput [readonly]="!editable" placeholder="pledge_amount" [(ngModel)]="selected_partner_data.pledge_amount" name="pledge_amount">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput [readonly]="!editable" placeholder="pledge_frequency" [(ngModel)]="selected_partner_data.pledge_frequency" name="pledge_frequency">
+      </mat-form-field>
+    </div>
+
+    <div class="form-label-group">
+      <button *ngIf="!selected_partner_data.status" mat-raised-button type="button" (click)="approvePartnerShip(selected_partner_data)" class="btn btn-danger pull-right">Approve</button>
+      <button mat-raised-button type="button" (click)="cancel()" class="btn btn-default ">Cancel</button>
+    </div>
+  </div>
+</form>

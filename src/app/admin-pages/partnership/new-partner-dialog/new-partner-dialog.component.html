@@ -1,0 +1,46 @@
+
+<form (submit)="addPartner()">
+  <div class="modal-body">
+    <div class="form-label-group">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Full Name" [(ngModel)]="new_partner_data.full_name" name="full_name" required>
+      </mat-form-field>
+    </div>
+    <div class="form-label-group">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Phone" [(ngModel)]="new_partner_data.phone" name="phone" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Email" [(ngModel)]="new_partner_data.email" name="email">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Country" [(ngModel)]="new_partner_data.country" name="country" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="City" [(ngModel)]="new_partner_data.city" name="city">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Adress" [(ngModel)]="new_partner_data.address" name="address" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="pledge_amount" [(ngModel)]="new_partner_data.pledge_amount" name="pledge_amount" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="pledge_frequency" >
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="pledge_frequency" [(ngModel)]="new_partner_data.pledge_frequency" name="pledge_frequency" required="">
+          <mat-option value="Daily">Daily</mat-option>
+          <mat-option value="Weekly">Weekly</mat-option>
+          <mat-option value="Monthly">Monthly</mat-option>
+          <mat-option value="Annually">Annually</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-label-group">
+      <button mat-raised-button type="submit" class="btn btn-danger pull-right">Add Partner</button>
+    </div>
+  </div>
+</form>

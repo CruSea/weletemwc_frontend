@@ -1,0 +1,24 @@
+<form>
+  <div class="modal-body">
+    <div class="form-label-group">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Full Name" [(ngModel)]="selected_user_data.full_name" name="full_name">
+      </mat-form-field>
+    </div>
+    <div class="form-label-group">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Email" [(ngModel)]="selected_user_data.email" name="user_email">
+      </mat-form-field>
+    </div>
+    <mat-form-field>
+      <mat-select placeholder="User Role" [(ngModel)]="selected_user_data.user_role_id" name="user_role_id">
+        <mat-option *ngFor="let user_role of user_roles_list" [value]="user_role.id">
+          {{user_role.display_name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="form-label-group">
+      <button mat-raised-button type="button" (click)="updateAdmin(selected_user_data)" class="btn btn-danger pull-right">Update User</button>
+    </div>
+  </div>
+</form>

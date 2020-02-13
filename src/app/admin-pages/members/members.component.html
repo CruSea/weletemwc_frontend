@@ -1,0 +1,225 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-warning card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">group</i>
+            </div>
+            <p class="card-category">
+              አባላት
+            </p>
+            <h3 class="card-title"> {{dashboard_member_data.all_members}}
+              <small>
+
+              </small>
+            </h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">assignment</i>
+              <a>የአባላት ጠቅላላ ቁጥር</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-success card-header-icon">
+            <div class="card-icon">
+              <i class="fa fa-user-o"></i>
+            </div>
+            <p class="card-category"> ወንድ አባላት</p>
+            <h3 class="card-title"> {{dashboard_member_data.male_members}}</h3>
+            <small></small>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">assignment</i>ጠቅላላ የወንድ አባላት ብዛት
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-danger card-header-icon">
+            <div class="card-icon">
+              <i class="fa fa-user-o"></i>
+            </div>
+            <p class="card-category"> ሴት አባላት</p>
+            <h3 class="card-title">{{dashboard_member_data.female_members}}</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">thumb_up</i>ጠቅላላ የሴት አባላት ብዛት
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="card">
+          <div class="card-header card-header-tabs card-header-warning">
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+                <span class="nav-tabs-title">መርጠክ አሳይ:</span>
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                  <li class="nav-item">
+                    <a mat-button class="nav-link" (click)="getMembers()" data-toggle="tab">
+                      <i class="material-icons">assignment</i> አባላት
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+
+                  <li class="nav-item pull-right">
+                    <div class="input-group col-sm-12 pull-right">
+                      <input type="text" name="searchTxt" id="searchTxt" [(ngModel)]= "searchText"  class="form-control">
+                      <span class="input-group-btn">
+                  <button class="btn btn-default" (click)="searchMember(searchText);" type="button">ፈልግ!</button>
+                   </span>
+                    </div><!-- /input-group -->
+                  </li>
+
+
+                  <li class="nav-item pull-right">
+                    <span class="col-lg-3 col-md-3 col-sm-12 nav-tabs-title">ተጨማሪ መፈለጊያ:</span>
+                    <div class="input-group col-lg-9 col-md-9 col-sm-12 pull-right">
+                      <input type="text" name="searchTxt" id="searchTxt" [(ngModel)]= "searchTextType"  class="form-control">
+
+                      <mat-form-field>
+                        <mat-select placeholder="የጋብቻ ሁኔታ"  name="marital_status" [(ngModel)]="searchType">
+                          <mat-option value="name">ስም</mat-option>
+                          <mat-option value="phone">ስልክ</mat-option>
+                          <mat-option value="email">ኢሜይል</mat-option>
+                          <mat-option value="gender">ፆታ</mat-option>
+                          <mat-option value="city">ከተማ</mat-option>
+                          <mat-option value="subcity">ክፍለ-ከተማ</mat-option>
+                          <mat-option value="educational_status">የትምህርት ደረጃ</mat-option>
+                          <mat-option value="marital_status">የጋብቻ ሁኔታ</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" (click)="searchMemberDetail(searchTextType, searchType);" type="button">ፈልግ!</button>
+                      </span>
+                    </div><!-- /input-group -->
+                  </li>
+
+                </ul>
+
+
+               <!-- <form class="example-form" class="col-sm-6">
+                  <mat-form-field>
+                    <input matInput placeholder="Search"  value="Search">
+                  </mat-form-field>
+                  <button mat-raised-button type="button" (click)="searchMember();" class="btn btn-default">Search</button>
+                </form>-->
+
+              </div>
+            </div>
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+                <ul class="nav nav-tabs pull-right" data-tabs="tabs">
+                  <li class="nav-item pull-right" *ngIf="filter_activate">
+                    <a mat-button class="nav-link active" (click)="addNewMemberDialog()">
+                      <button mat-raised-button >አዲስ አባል ይፍጠሩ</button>
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="row">
+            <div class="col-lg-12 col-md-12">
+              <div class="card">
+                <div class="card-body">
+                  <h5 *ngIf="filter_activate">ሁሉም አባላት</h5>
+                  <div class="dropdown pull-left">
+                    <a class="dropdown-toggle"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Export
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item"  (click)="ExportMembers()">
+                        Export Members To Excel
+                      </a>
+                      <a class="dropdown-item"  (click)="DownloadPdfMembers()">
+                        Export PDF
+                      </a>
+                    </div>
+                  </div>
+                  <!--<div class="inline">-->
+                    <!--<input class="form-control"  type="file" name="import_file" id="import_file" (change)="fileUploadEvent($event)">-->
+                  <!--</div>-->
+
+                  <!--<button mat-button (click)="ImportMembers()">Import</button>-->
+                  <mat-paginator [length]="paginated_member_data.total"
+                                 [pageSize]="paginated_member_data.per_page"
+                                 [pageSizeOptions]="pageSizeOptions"
+                                 (page)="updateMemberDataList($event)">
+                  </mat-paginator>
+
+                  <div class="table-responsive">
+                    <table class="table table-hover table-striped table-condensed">
+                      <thead class=" text-primary">
+                      <th> ቁጥር </th>
+                      <th> መለያ ቁጥር</th>
+                      <th> ሙሉ ስም</th>
+                      <th> ኢሜይል </th>
+                      <th> ፆታ </th>
+                      <th> ስልክ ቁጥር </th>
+                      <th> ስራ </th>
+                      <th> Created At </th>
+                      <th> ተጨማሪ </th>
+                      <th> </th>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let members of paginated_member_data.data; let i = index"   style="cursor: pointer;">
+                        <td> {{paginated_member_data.from + i}} </td>
+                        <td> {{members.member_id}} </td>
+                        <td class="zoom" (click)="viewMemberInfo(members)"> <strong >{{members.full_name}}</strong> </td>
+                        <td class="zoom" (click)="viewMemberInfo(members)"> {{members.email}} </td>
+                        <td class="zoom" (click)="viewMemberInfo(members)"> {{members.gender}} </td>
+                        <td class="zoom" (click)="viewMemberInfo(members)"> {{members.phone_cell}} </td>
+                        <td class="zoom" (click)="viewMemberInfo(members)"> {{members.occupation}} </td>
+                        <td class="zoom"> {{members.created_at}} </td>
+                        <td class="td-actions">
+                          <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <i class="material-icons">edit</i>  ተጨማሪ
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" (click)="viewMemberInfo(members)">የአባላት መረጃ ይመልከቱ</a>
+                              <a class="dropdown-item" (click)="updateMemberDialog(members)" *ngIf="filter_activate">የአባላት መረጃ ያዘምኑ</a>
+                              <a class="dropdown-item" (click)="removeMember(members)">አባልን ያስወግዱ</a>
+                            </div>
+                          </div>
+
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <mat-paginator [length]="paginated_member_data.total"
+                                 [pageSize]="paginated_member_data.per_page"
+                                 [pageSizeOptions]="pageSizeOptions"
+                                 (page)="updateMemberDataList($event)">
+                  </mat-paginator>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '5px' }"></ngx-loading>
