@@ -15,6 +15,8 @@ import {
 } from '@angular/material';
 import {RouterModule} from '@angular/router';
 import {NgxLoadingModule} from 'ngx-loading';
+import { WebcamModule } from 'ngx-webcam';
+
 import {AlertModule, BsDatepickerModule, ModalModule, PaginationModule, TooltipModule} from 'ngx-bootstrap';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
@@ -51,6 +53,7 @@ import { TeamCategoriesComponent } from './teams/team-categories/team-categories
 import { NewTeamCategoryComponent } from './teams/team-categories/new-team-category/new-team-category.component';
 import { NewMemberChildComponent } from './members/edit-member/new-member-child/new-member-child.component';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -58,6 +61,7 @@ import { NewMemberChildComponent } from './members/edit-member/new-member-child/
     ComponentsModule,
     FormsModule,
     ReactiveFormsModule,
+    WebcamModule,
     MatButtonModule,
     MatRippleModule,
     MatFormFieldModule,

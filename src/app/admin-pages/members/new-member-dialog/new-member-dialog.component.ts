@@ -8,6 +8,8 @@ import {UsersService} from '../../services/users.service';
 import {Spouse} from "../spouse-info.objects";
 import swal from 'sweetalert2';
 import {Countries} from "../countries.objects";
+import {WebcamImage, WebcamInitError, WebcamUtil} from "ngx-webcam";
+import {Observable, Subject} from "rxjs/Rx";
 @Component({
   selector: 'app-new-member-dialog',
   templateUrl: './new-member-dialog.component.html',
@@ -33,6 +35,22 @@ export class NewMemberDialogComponent implements OnInit, AfterViewInit {
   public panel4 = false;
   public loading = false;
   public photo_taken = false;
+
+
+
+  //wecam
+    public showWebcam = true;
+    public multipleWebcamsAvailable = false;
+    public videoOptions: MediaTrackConstraints = {
+        // width: {ideal: 1024},
+        // height: {ideal: 576}
+    };
+    public errors: WebcamInitError[] = [];
+    // latest snapshot
+    public webcamImage: WebcamImage = null;
+    // webcam snapshot trigger
+    private trigger: Subject<void> = new Subject<void>();
+    // switch to next / previous / specific webcam; true/false: forward/backwards, string: deviceId
   constructor(private membersService: MembersService,
               private _formBuilder: FormBuilder,
               private usersService: UsersService,
@@ -47,6 +65,11 @@ export class NewMemberDialogComponent implements OnInit, AfterViewInit {
     this.usersService.UserRoleListEmitter.subscribe(
         data => {this.user_roles_list = data; }
     );
+
+    WebcamUtil.getAvailableVideoInputs()
+          .then((mediaDevices: MediaDeviceInfo[]) => {
+              this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
+          });
   }
     public updateMembersComponent() {
         this.membersService.getMembersData();
@@ -137,6 +160,7 @@ export class NewMemberDialogComponent implements OnInit, AfterViewInit {
           );
       } else {
           this.loading = true;
+          this.new_member.image_file = null;
           this.new_member.photo_url = this.image;
           console.log(this.new_member.photo_url);
           this.membersService.addNewMember2(this.new_member).subscribe(
@@ -281,5 +305,32 @@ export class NewMemberDialogComponent implements OnInit, AfterViewInit {
     public cancel() {
         this.dialogRef.close();
     }
+
+    /**
+     * Webcam codes
+     *
+     */
+    public triggerSnapshot(): void {
+        this.trigger.next();
+    }
+
+    public toggleWebcam(): void {
+        this.showWebcam = !this.showWebcam;
+    }
+
+    public handleInitError(error: WebcamInitError): void {
+        this.errors.push(error);
+    }
+
+    public handleImage(webcamImage: WebcamImage): void {
+        console.info('received webcam image', webcamImage);
+        this.webcamImage = webcamImage;
+    }
+
+
+    public get triggerObservable(): Observable<void> {
+        return this.trigger.asObservable();
+    }
+
 
 }

@@ -19,12 +19,12 @@
                         </mat-panel-description>
                     </mat-expansion-panel-header>
                     <div class="row">
+
                         <div class="col-sm-3">
                             <mat-card>
                                 <div [hidden]="!photo_taken">
                                 <canvas  #canvas id="canvas" width="180" height="180" class="form-group"></canvas>
                                 </div>
-                                <!--<div class="col-sm-1">-->
                                 <div id="app">
                                     <div [hidden]="photo_taken">
                                         <video #video id="video" width="180" height="180" autoplay></video>
@@ -42,6 +42,8 @@
                             <br>
                             <br>
                         </div>
+
+
                         <div class="col-sm-2">
                             <mat-form-field>
                                 <input matInput placeholder="ሙሉ ስም" name="full_name"
